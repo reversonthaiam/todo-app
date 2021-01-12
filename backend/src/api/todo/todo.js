@@ -7,4 +7,4 @@ const todoSchema = new mongoose.Schema({
   createAt: { type: Date, default: Date.now}
 })
 
-modulo.exports = restful.model('Todo', todoSchema)
+module.exports = restful.model('Todo', todoSchema)
