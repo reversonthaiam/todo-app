@@ -1,7 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 import IconButton from "../template/iconButton";
 
-export default (props) => {
+const TodoList = (props) => {
   const renderRows = () => {
     const list = props.list || [];
     return list.map((todo) => (
@@ -12,19 +13,19 @@ export default (props) => {
             style="success"
             icon="check"
             hide={todo.done}
-            onClick={() => props.handleMarkAsDone(todo)}
+            onClick={() => props.markAsDone(todo)}
           ></IconButton>
           <IconButton
             style="warning"
             icon="undo"
             hide={!todo.done}
-            onClick={() => props.handleMarkAsPending(todo)}
+            onClick={() => props.markAsPending(todo)}
           ></IconButton>
           <IconButton
             style="danger"
-            hide={!todo.done}
             icon="trash-o"
-            onClick={() => props.handleRemove(todo)}
+            hide={!todo.done}
+            onClick={() => props.remove(todo)}
           ></IconButton>
         </td>
       </tr>
@@ -43,3 +44,6 @@ export default (props) => {
     </table>
   );
 };
+
+const mapStateToProps = (state) => ({ list: state.todo.list });
+export default connect(mapStateToProps)(TodoList);
