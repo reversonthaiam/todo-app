@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
 import IconButton from "../template/iconButton";
 
 const TodoList = (props) => {
@@ -13,19 +12,19 @@ const TodoList = (props) => {
             style="success"
             icon="check"
             hide={todo.done}
-            onClick={() => props.markAsDone(todo)}
+            onClick={() => props.handleMarkAsDone(todo)}
           ></IconButton>
           <IconButton
             style="warning"
             icon="undo"
             hide={!todo.done}
-            onClick={() => props.markAsPending(todo)}
+            onClick={() => props.handleMarkAsPending(todo)}
           ></IconButton>
           <IconButton
             style="danger"
-            icon="trash-o"
             hide={!todo.done}
-            onClick={() => props.remove(todo)}
+            icon="trash-o"
+            onClick={() => props.handleRemove(todo)}
           ></IconButton>
         </td>
       </tr>
