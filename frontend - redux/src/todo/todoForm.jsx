@@ -1,24 +1,25 @@
 import React, { Component } from "react";
-import Grid from "../template/grid";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+
+import Grid from "../template/grid";
 import IconButton from "../template/iconButton";
 import { add, changeDescription, search } from "./todoActions";
 
 class TodoForm extends Component {
   constructor(props) {
     super(props);
-    this.KeyHandler = this.KeyHandler.bind(this);
+    this.keyHandler = this.keyHandler.bind(this);
   }
 
   componentWillMount() {
     this.props.search();
   }
 
-  KeyHandler(e) {
+  keyHandler(e) {
     const { add, search, description } = this.props;
     if (e.key === "Enter") {
-      e.shiftkey ? Search() : add(description);
+      e.shiftKey ? search() : add(description);
     } else if (e.key === "Escape") {
       props.handleClear();
     }
@@ -29,31 +30,25 @@ class TodoForm extends Component {
       <div role="form" className="todoForm">
         <Grid cols="12 9 10">
           <input
-            placeholder="Adicione uma tarefa"
             id="description"
-            type="text"
             className="form-control"
-            value={this.props.description}
+            placeholder="Adicione uma tarefa"
             onChange={this.props.changeDescription}
-            onKeyUp={this.props.KeyHandler}
-          />
+            onKeyUp={this.keyHandler}
+            value={this.props.description}
+          ></input>
         </Grid>
-
         <Grid cols="12 3 2">
           <IconButton
             style="primary"
             icon="plus"
             onClick={() => add(description)}
           ></IconButton>
-          <IconButton
-            style="info"
-            icon="search"
-            onClick={() => search()}
-          ></IconButton>
+          <IconButton style="info" icon="search" onClick={search}></IconButton>
           <IconButton
             style="default"
             icon="close"
-            onClick={this.props.handleClear}
+            onClick={this.props.clear}
           ></IconButton>
         </Grid>
       </div>
